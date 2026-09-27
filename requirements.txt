@@ -1,0 +1,36 @@
+# --- Orchestration (LangGraph = stateful graph with loops, ideal for Draft -> Critique -> Redraft) ---
+langgraph>=0.2.50
+langchain>=0.3.0
+langchain-core>=0.3.0
+# NOTE: langchain-community is being sunset upstream (still works, just prints a
+# DeprecationWarning — see the langchain-community GitHub for migration status).
+# It's what supplies PyMuPDFLoader/TextLoader in ingest.py. Not urgent to change;
+# no stable dedicated replacement package for PyMuPDFLoader existed as of this
+# writing. Revisit if the warning becomes a hard removal in a future release.
+langchain-community>=0.3.0
+langchain-text-splitters>=0.3.0
+
+# --- Vector store + local embeddings (free, private) ---
+chromadb>=0.5.0
+langchain-chroma>=0.1.4
+langchain-huggingface>=0.1.0
+sentence-transformers>=3.0.0
+
+# --- PDF parsing (PyMuPDF is fast and far more robust than pypdf on slide decks) ---
+pymupdf>=1.24.0
+
+# --- Image extraction from PDFs: OCR (local, free) + optional local vision captioning ---
+pytesseract>=0.3.10   # requires the Tesseract OCR binary installed separately, see README
+Pillow>=10.0.0
+requests>=2.31.0      # only used if --caption-images talks to a local Ollama server
+
+# --- LLM providers (used from Step 2 onward) ---
+langchain-ollama>=0.2.0        # local workers
+langchain-groq>=0.2.0          # free/fast hosted workers (alternative to Ollama)
+langchain-google-genai>=2.0.0  # Gemini manager/critic
+langchain-openai>=0.2.0        # DeepSeek exposes an OpenAI-compatible API
+
+# --- Utilities ---
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+tqdm>=4.66.0
